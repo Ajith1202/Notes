@@ -11,7 +11,8 @@ User = get_user_model()
 def NoteListCreateAPIView(request):
     user = request.user
     if not user.is_authenticated:
-        return Response("LOGIN TO YOUR ACCOUNT")
+        content = {"Login to your account."}
+        return Response(content, status=status.HTTP_401_UNAUTHORIZED)
 
     if request.method == 'GET':
         notes_set = user.notes.all()
